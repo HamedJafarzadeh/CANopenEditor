@@ -1327,9 +1327,9 @@ namespace libEDSsharp
                 accType = parent.accesstype;
 
             if (PDOtype == PDOMappingType.RPDO || accType == EDSsharp.AccessType.rwr)
-                return libEDSsharp.AccessPDO.r;
-            else if (PDOtype == PDOMappingType.TPDO || accType == EDSsharp.AccessType.rww)
                 return libEDSsharp.AccessPDO.t;
+            else if (PDOtype == PDOMappingType.TPDO || accType == EDSsharp.AccessType.rww)
+                return libEDSsharp.AccessPDO.r;
             if (PDOtype == PDOMappingType.optional || PDOtype == PDOMappingType.@default)
                 return libEDSsharp.AccessPDO.tr;
             else

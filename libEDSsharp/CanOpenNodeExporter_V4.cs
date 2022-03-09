@@ -56,6 +56,10 @@ namespace libEDSsharp
         UInt16 CNT_TPDO = 0;
         UInt16 CNT_GFC = 0;
         UInt16 CNT_SRDO = 0;
+        UInt16 CNT_STORAGE = 0;
+        UInt16 CNT_EM_PROD = 0;
+        UInt16 CNT_SYNC_PROD = 0;
+        UInt16 CNT_HB_PROD = 0;
 
         /// <summary>
         /// export the current data set in the CanOpen Node format V4
@@ -125,6 +129,14 @@ namespace libEDSsharp
                     CNT_GFC++;
                 if (od.Index>=0x1301 && od.Index<0x1380)
                     CNT_SRDO++;
+                if (od.Index==0x1010)
+                    CNT_STORAGE++;
+                if (od.Index==0x1014)
+                    CNT_EM_PROD++;
+                if (od.Index==0x1006)
+                    CNT_SYNC_PROD++;
+                if (od.Index == 0x1006)
+                    CNT_HB_PROD++;
                 string indexH = $"{od.Index:X4}";
                 string cName = Make_cname(od.parameter_name);
                 string varName = $"{indexH}_{cName}";
@@ -192,6 +204,10 @@ namespace libEDSsharp
                 ODCnt.Add("TPDO", CNT_TPDO);
                 ODCnt.Add("GFC", CNT_GFC);
                 ODCnt.Add("SRDO", CNT_SRDO);
+                ODCnt.Add("STORAGE", CNT_STORAGE);
+                ODCnt.Add("EM_PROD", CNT_EM_PROD);
+                ODCnt.Add("SYNC_PROD", CNT_SYNC_PROD);
+                ODCnt.Add("HB_PROD", CNT_HB_PROD);
             }
         }
 
@@ -555,6 +571,10 @@ namespace libEDSsharp
     (config).ENTRY_H1381 = {(eds.ods.ContainsKey(0x1381) ? odname + "_ENTRY_H1381" : "NULL")};\
     (config).ENTRY_H13FE = {(eds.ods.ContainsKey(0x13FE) ? odname + "_ENTRY_H13FE" : "NULL")};\
     (config).ENTRY_H13FF = {(eds.ods.ContainsKey(0x13FF) ? odname + "_ENTRY_H13FF" : "NULL")};\
+    (config).CNT_GFC = {(ODCnt.ContainsKey("STORAGE") ? odname + "_CNT_STORAGE" : "0")};\
+    (config).CNT_GFC = {(ODCnt.ContainsKey("EM_PROD") ? odname + "_EM_PROD" : "0")};\
+    (config).CNT_GFC = {(ODCnt.ContainsKey("SYNC_PROD") ? odname + "_SYNC_PROD" : "0")};\
+    (config).CNT_GFC = {(ODCnt.ContainsKey("HB_PROD") ? odname + "_HB_PROD" : "0")};\
     (config).CNT_LSS_SLV = 0;\
     (config).CNT_LSS_MST = 0;\
     (config).CNT_GTWA = 0;\
